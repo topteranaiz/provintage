@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\UserAccount;
 use App\Models\Saler;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,6 +25,13 @@ class ProfileController extends Controller
         $this->data['edit'] = $user->find($id);
 
         return view('manage.profile.user', $this->data);
+    }
+
+    public function editAdmin($id, Admin $admin) {
+
+        $this->data['edit'] = $admin->find($id);
+
+        return view('manage.profile.admin', $this->data);
     }
 
     public function updateShop(Request $req, Saler $saler) {
@@ -84,5 +92,35 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.edit.member', [$id]);
+    }
+
+    public function updateAdmin(Request $req, Admin $admin) {
+
+        $inputs = $req->only('name', 'email', 'line_id', 'facebook', 'tel');
+        if (!empty($req->password)) {
+            $inputs['password'] = Hash::make($req->password);
+        }
+        
+        $id = $req->admin_id;
+
+        $data = $admin->find($id);
+
+        $data->update($inputs);
+
+        if ($req->hasFile('image')) {
+            $item = $req->file('image');
+            $filePath = 'image/profile';
+            $this->createFolder($filePath);
+            $ext = $item->getClientOriginalExtension();
+            $size = \File::size($item);
+            $oldFilename = $item->getClientOriginalName();
+            $filename = $this->generateFilename(public_path($filePath));
+            $filenameWithExtension = $filename . '.' . $ext;
+            $attach['image'] = $filePath . '/' . $filenameWithExtension;
+            $data->update($attach);
+            $item->move(public_path($filePath) , $filenameWithExtension);
+        }
+
+        return redirect()->route('profile.edit.admin', [$id]);
     }
 }

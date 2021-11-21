@@ -14,47 +14,87 @@ use Illuminate\Support\Facades\Auth;
 class BlacklistController extends Controller
 {
 
-    public function index(Saler $saler) {
-        $this->data['data'] = $saler->where('type_personal', 0)->get();
+    public function index(Blacklist $blacklist) {
+        $this->data['data'] = $blacklist->get();
         return view('manage.blacklist.index', $this->data);
     }
 
-    public function edit($id, Saler $saler) {
+    public function create() {
 
-        $this->data['edit'] = $saler->find($id);
-
-        return view('manage.blacklist.form', $this->data);
+        return view('manage.blacklist.form');
     }
 
-    public function update(Request $req, Blacklist $blacklist) {
+    public function store(Request $req, Blacklist $blacklist) {
 
-        $inputs = $req->only('detail', 'saler_id');
+        $inputs = $req->only('name', 'card_id', 'price', 'date_transfer', 'web');
+        $newObj = $blacklist->create($inputs);
+
         if ($req->hasFile('image')) {
-            foreach($req->file('image') as $key => $item){
-                $filePath = 'image/blacklist';
-                $this->createFolder($filePath);
-                $ext = $item->getClientOriginalExtension();
-                $size = \File::size($item);
-                $oldFilename = $item->getClientOriginalName();
-                $filename = $this->generateFilename(public_path($filePath));
-                $filenameWithExtension = $filename . '.' . $ext;
-                $attach['image'] = $filePath . '/' . $filenameWithExtension;
-                $attach['detail'] = $inputs['detail'][$key];
-                $attach['saler_id'] = $inputs['saler_id'];
-                $blacklist->create($attach);
-                //การบันทึกรูปตาม path
-                $item->move(public_path($filePath) , $filenameWithExtension);
-            }
+            $data = $blacklist->find($newObj->blacklist_id);
+            $item = $req->file('image');
+            $filePath = 'image/blacklist';
+            $this->createFolder($filePath);
+            $ext = $item->getClientOriginalExtension();
+            $size = \File::size($item);
+            $oldFilename = $item->getClientOriginalName();
+            $filename = $this->generateFilename(public_path($filePath));
+            $filenameWithExtension = $filename . '.' . $ext;
+            $attach['image'] = $filePath . '/' . $filenameWithExtension;
+            $data->update($attach);
+            //การบันทึกรูปตาม path
+            $item->move(public_path($filePath) , $filenameWithExtension);
         }
 
         return redirect('/blacklist');
     }
 
-    // public function delete($id, TypeProduct $typeProduct) {
+    public function edit($id, Blacklist $blacklist) {
 
-    //     $data = $typeProduct->find($id);
-    //     $data->delete();
+        $this->data['edit'] = $blacklist->find($id);
 
-    //     return redirect('/type-product');
-    // }
+        return view('manage.blacklist.form', $this->data);
+    }
+    
+
+    public function update(Request $req, Blacklist $blacklist) {
+
+        $inputs = $req->only('name', 'card_id', 'price', 'date_transfer', 'web');
+
+        $id = $req->blacklist_id;
+
+        $dataBlacklist = $blacklist->find($id);
+
+        $dataBlacklist->update($inputs);
+
+        if ($req->hasFile('image')) {
+            $item = $req->file('image');
+            $filePath = 'image/blacklist';
+            $this->createFolder($filePath);
+            $ext = $item->getClientOriginalExtension();
+            $size = \File::size($item);
+            $oldFilename = $item->getClientOriginalName();
+            $filename = $this->generateFilename(public_path($filePath));
+            $filenameWithExtension = $filename . '.' . $ext;
+            $attach['image'] = $filePath . '/' . $filenameWithExtension;
+            $dataBlacklist->update($attach);
+            //การบันทึกรูปตาม path
+            $item->move(public_path($filePath) , $filenameWithExtension);
+        }
+
+        return redirect('/blacklist');
+    }
+
+    public function delete($id, Blacklist $blacklist) {
+
+        $data = $blacklist->find($id);
+        if (!empty($data->image)) {
+            if(file_exists($data->path)){
+                //ทำการลบรูปภาพในเครื่อง
+                unlink(public_path($data->path));
+            }
+        }
+        $data->delete();
+
+        return redirect('/blacklist');
+    }
 }

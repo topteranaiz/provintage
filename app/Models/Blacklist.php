@@ -11,9 +11,12 @@ Class Blacklist extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'saler_id',
-        'detail',
+        'name',
+        'card_id',
         'image',
+        'date_transfer',
+        'price',
+        'web'
     ];
 
     // public function getUser() {

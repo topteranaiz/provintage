@@ -25,6 +25,10 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Saler::class,
     ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -63,6 +67,11 @@ return [
         'shop' => [
             'driver' => 'session',
             'provider' => 'shops'
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins'
         ]
     ],
 
@@ -95,6 +104,10 @@ return [
         'shops' => [
             'driver' => 'eloquent',
             'model' => App\Models\Saler::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

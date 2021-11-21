@@ -84,15 +84,15 @@
                 <div class="col-md-12 order-md-last pr-md-6">
                     <form action="{{ route('post.login') }}" method="POST">
                         @csrf
+                        @if (\Session::has('error'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{!! \Session::get('error') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group">
-                            <select name="type_personal_id" class="typePersonal form-control">
-                                <option value="">กรุณาเลือกประเภท</option>
-                                <option value="1">พ่อค้าแม่ค้า</option>
-                                <option value="2">สมาชิก</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="email" placeholder="E-mail">
+                            <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-mail">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="password" placeholder="Password">

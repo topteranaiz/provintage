@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\TypeProduct;
 use App\Models\ProductAttachment;
 use App\Models\Comment;
+use App\Models\Saler;
 
 class Product extends Model
 {
@@ -37,6 +38,10 @@ class Product extends Model
 
     public function getComment() {
         return $this->hasMany(Comment::class, 'product_id', 'product_id');
+    }
+
+    public function getSaler() {
+        return $this->belongsTo(Saler::class, 'saler_id', 'saler_id');
     }
 
 }

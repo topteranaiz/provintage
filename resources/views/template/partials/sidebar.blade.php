@@ -8,26 +8,29 @@
             <h1 id="colorlib-logo">{{ Auth::guard('member')->user()->name }}<br>
                 <a href="{{ route('profile.edit.member', Auth::guard('member')->user()->user_id) }}"><span>Edit Profile</span></a>
             </h1>
+        @elseif(!empty(Auth::guard('admin')->user()))
+            <h1 id="colorlib-logo">{{ Auth::guard('admin')->user()->name }}<br>
+                <a href="{{ route('profile.edit.admin', Auth::guard('admin')->user()->admin_id) }}"><span>Edit Profile</span></a>
+            </h1>
         @endif
     {{-- </h1> --}}
     <nav id="colorlib-main-menu" role="navigation">
+        {{-- {{ dd(request()->is('website/blacklist')) }} --}}
         <ul>
-            <li><a href="{{ route('website.home') }}">Home</a></li>
-            <li><a href="{{ route('website.define') }}">นิยาม</a></li>
-            <li><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
-            <li><a href="{{ route('website.blacklist') }}">บุคคลที่ควรระวัง</a></li>
+            <li @if(request()->is('website') || request()->is('website/search/*')) class="colorlib-active" @endif><a href="{{ route('website.home') }}">Home</a></li>
+            <li @if(request()->is('website/define')) class="colorlib-active" @endif><a href="{{ route('website.define') }}">นิยาม</a></li>
+            <li @if(request()->is('website/shirt-label')) class="colorlib-active" @endif><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
+            <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('website.blacklist') }}">บุคคลที่ควรระวัง</a></li>
             @if(empty(Session::get('data')))
-                <li><a href="{{ route('login') }}">Login</a></li>
+                <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('login') }}">Login</a></li>
             @else
                 @if(!empty(Auth::guard('shop')->user()))
-                    @if(Auth::guard('shop')->user()->type_personal == 1)
-                        <li><a href="{{ route('typeProduct.index') }}">รายการประเภทสินค้า</a></li>
-                        <li><a href="{{ route('blacklist.index') }}">blacklist</a></li>
-                    @else
-                        <li><a href="{{ route('product.index') }}">รายการสินค้า</a></li>
-                    @endif
+                    <li @if(request()->is('product')) class="colorlib-active" @endif><a href="{{ route('product.index') }}">รายการสินค้า</a></li>
                 @elseif(!empty(Auth::guard('member')->user()))
-                    <li><a href="#">รายการสั่งซื้อสินค้า</a></li>
+                    {{-- <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="#">รายการสั่งซื้อสินค้า</a></li> --}}
+                @elseif(!empty(Auth::guard('admin')->user()))
+                    <li @if(request()->is('type-product')) class="colorlib-active" @endif><a href="{{ route('typeProduct.index') }}">รายการประเภทสินค้า</a></li>
+                    <li @if(request()->is('blacklist')) class="colorlib-active" @endif><a href="{{ route('blacklist.index') }}">blacklist</a></li>
                 @endif
                 <li><a href="{{ route('get.logout') }}">Logout</a></li>
             @endif

@@ -88,37 +88,48 @@
                 <div class="col-md-12 order-md-last pr-md-6">
                     <form action="{{ route('store.register') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if (\Session::has('error'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{!! \Session::get('error') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="">กรุณาเลือกประเภท</label>
                             <select name="type_personal_id" class="typePersonal form-control">
                                 <option value="">กรุณาเลือกประเภท</option>
-                                <option value="1">พ่อค้าแม่ค้า</option>
-                                <option value="2">สมาชิก</option>
+                                <option {{ old('type_personal_id') == "1" ? 'selected': '' }} value="1">พ่อค้าแม่ค้า</option>
+                                <option {{ old('type_personal_id') == "2" ? 'selected': '' }} value="2">สมาชิก</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">ชื่อ</label>
-                            <input type="text" class="form-control" required placeholder="กรุณากรอก ชื่อ" name="name">
+                            <input type="text" class="form-control" required placeholder="กรุณากรอก ชื่อ" value="{{ old('name') }}" name="name">
                         </div>
                         <div class="form-group">
                             <label for="">อีเมล</label>
-                            <input type="email" class="form-control" required placeholder="กรุณากรอก E-mail" name="email">
+                            <input type="email" class="form-control" required placeholder="กรุณากรอก E-mail" value="{{ old('email') }}" name="email">
                         </div>
                         <div class="form-group">
                             <label for="">รหัสผ่าน</label>
-                            <input type="text" class="form-control" required placeholder="กรุณากรอก Password" name="password">
+                            <input type="password" class="form-control" required placeholder="กรุณากรอก Password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" required placeholder="กรุณากรอก ยืนยันรหัสผ่าน" name="confirmed">
                         </div>
                         <div class="form-group">
                             <label for="">รูปภาพโปรไฟล์</label>
                             <input type="file" class="form-control" name="image">
                         </div>
-                        <div class="shop form-group" style="display: none;">
+                        <div class="shop form-group" @if(old('type_personal_id') == "1") style="display: block;" @else style="display: none;"@endif>
                             <label for="">Line</label>
-                            <input type="text" class="form-control" placeholder="กรุณากรอก Line" name="line_id">
+                            <input type="text" class="form-control" placeholder="กรุณากรอก Line" name="line_id" value="{{ old('line_id') }}">
                         </div>
-                        <div class="shop form-group" style="display: none;">
+                        <div class="shop form-group" @if(old('type_personal_id') == "1") style="display: block;" @else style="display: none;"@endif>
                             <label for="">บัตรประชาชน</label>
-                            <input type="text" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" name="card_id" maxlength="13">
+                            <input type="text" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" name="card_id" maxlength="13" value="{{ old('card_id') }}">
                         </div>
                         <div align="center" class="form-group">
                             <input type="submit" value="Register" class="btn btn-primary py-3 px-5">

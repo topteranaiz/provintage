@@ -21,6 +21,12 @@ Route::get('website-logout', 'LoginController@getLogout')->name('get.logout');
 
 Route::group(['prefix' => 'website'], function() {
     Route::get('/','WebsiteController@index')->name('website.home');
+    Route::get('/search/cat/{searchCat}','WebsiteController@searchCategories')->name('website.cat');
+    Route::get('/search/fab/{searchFab}','WebsiteController@searchFabric')->name('website.fab');
+    Route::get('/search/size/{searchSize}','WebsiteController@searchSize')->name('website.size');
+    Route::get('/search/year/{searchYear}','WebsiteController@searchYear')->name('website.year');
+    Route::get('/search/madein/{searchMadein}','WebsiteController@searchMadeIn')->name('website.madein');
+
     Route::get('/detail/{id}', 'WebsiteController@detail')->name('website.detail');
     Route::get('/define','WebsiteController@getDefine')->name('website.define');
     Route::get('/shirt-label', 'WebsiteController@getShirtLabel')->name('website.shirt.label');
@@ -42,17 +48,22 @@ Route::group(['prefix' => 'type-product'], function() {
 
 Route::group(['prefix' => 'blacklist'], function() {
     Route::get('/','BlacklistController@index')->name('blacklist.index');
+    Route::get('/create','BlacklistController@create')->name('blacklist.create');
+    Route::post('/store','BlacklistController@store')->name('blacklist.store');
     Route::get('/edit/{id}','BlacklistController@edit')->name('blacklist.edit');
     Route::post('/update','BlacklistController@update')->name('blacklist.update');
-    // Route::get('/delete/{id}', 'BlacklistController@delete')->name('blacklist.delete');
+    Route::get('/delete/{id}', 'BlacklistController@delete')->name('blacklist.delete');
 });
 
 Route::group(['prefix' => 'profile'], function() {
     Route::get('/shop/edit/{id}','ProfileController@editShop')->name('profile.edit.shop');
     Route::get('/member/edit/{id}','ProfileController@editMember')->name('profile.edit.member');
+    Route::get('/admin/edit/{id}','ProfileController@editAdmin')->name('profile.edit.admin');
 
     Route::post('/shop/update','ProfileController@updateShop')->name('profile.update.shop');
     Route::post('/member/update','ProfileController@updateMember')->name('profile.update.member');
+    Route::post('/admin/update','ProfileController@updateAdmin')->name('profile.update.admin');
+    
 
 });
 

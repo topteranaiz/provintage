@@ -27,6 +27,10 @@
                                 
                                 <div class="meta-wrap d-md-flex align-items-center">
                                     <div class="half">
+                                        <h3 class="mb-4"><a href="#">ข้อมูลผู้ขาย</a></h3>
+                                        <p>ชื่อ : {{ $detail->getSaler->name }}</p>
+                                        <p>E-mail : {{ $detail->getSaler->email }}</p>
+                                        <p>Line : {{ $detail->getSaler->line_id }}</p>
                                     </div>
                                 </div>
                                 <hr>

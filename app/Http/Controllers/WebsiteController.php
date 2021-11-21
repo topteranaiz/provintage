@@ -10,13 +10,79 @@ use App\Models\Comment;
 use App\Models\Blacklist;
 use App\Models\UserAccount;
 use App\Models\Saler;
+use App\Models\Admin;
+
 
 class WebsiteController extends Controller
 {
 
     public function index(Product $product, TypeProduct $typeproduct) {
 
-        // dd(request()->all());
+        $inputs = request()->input();
+
+        if (isset($inputs['name'])) {
+            $product = $product->where('name','LIKE','%' . trim($inputs['name']) . '%');
+        }
+
+        if (isset($inputs['price'])) {
+            $product = $product->where('price',$inputs['price']);
+        }
+
+        $this->data['products'] = $product->get();
+        $this->data['typeproducts'] = $typeproduct->get();
+        return view('website.home', $this->data);
+    }
+
+    public function searchCategories($searchCat, Product $product, TypeProduct $typeproduct) {
+
+        if (isset($searchCat)) {
+            $product = $product->where('type_product_id',$searchCat);
+        }
+
+        $this->data['products'] = $product->get();
+        $this->data['typeproducts'] = $typeproduct->get();
+        return view('website.home', $this->data);
+    }
+
+    public function searchFabric($searchFab, Product $product, TypeProduct $typeproduct) {
+
+        if (isset($searchFab)) {
+            $product = $product->where('fabric_type',$searchFab);
+        }
+
+        $this->data['products'] = $product->get();
+        $this->data['typeproducts'] = $typeproduct->get();
+        return view('website.home', $this->data);
+    }
+
+    public function searchSize($searchSize, Product $product, TypeProduct $typeproduct) {
+
+        if (isset($searchSize)) {
+            $product = $product->where('size',$searchSize);
+        }
+
+        $this->data['products'] = $product->get();
+        $this->data['typeproducts'] = $typeproduct->get();
+        return view('website.home', $this->data);
+    }
+
+    public function searchYear($searchYear, Product $product, TypeProduct $typeproduct) {
+
+        if (isset($searchYear)) {
+            $product = $product->where('year',$searchYear);
+        }
+
+        $this->data['products'] = $product->get();
+        $this->data['typeproducts'] = $typeproduct->get();
+        return view('website.home', $this->data);
+    }
+
+    public function searchMadeIn($searchMadein, Product $product, TypeProduct $typeproduct) {
+
+        if (isset($searchMadein)) {
+            $product = $product->where('made_in',$searchMadein);
+        }
+
         $this->data['products'] = $product->get();
         $this->data['typeproducts'] = $typeproduct->get();
         return view('website.home', $this->data);
@@ -51,14 +117,10 @@ class WebsiteController extends Controller
 
     }
 
-    public function getBlacklist(Blacklist $blacklist, Saler $saler) {
-        $dataBlacklist = $blacklist->get();
+    public function getBlacklist(Blacklist $blacklist, Admin $admin) {
 
-        $dataArray = array_column($dataBlacklist->toArray(), 'saler_id');
-
-        $dataUnique = array_unique($dataArray);
-
-        $this->data['salers'] = $saler->whereIn('saler_id', [$dataUnique])->get();
+        $this->data['blacklists'] = $blacklist->get();
+        $this->data['admin'] = $admin->first();
 
         return view('website.blacklist', $this->data);
     }
