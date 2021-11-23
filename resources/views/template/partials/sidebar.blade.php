@@ -22,7 +22,7 @@
             <li @if(request()->is('website/shirt-label')) class="colorlib-active" @endif><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
             <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('website.blacklist') }}">บุคคลที่ควรระวัง</a></li>
             @if(empty(Session::get('data')))
-                <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('login') }}">Login</a></li>
+                <li @if(request()->is('login')) class="colorlib-active" @endif><a href="{{ route('login') }}">Login</a></li>
             @else
                 @if(!empty(Auth::guard('shop')->user()))
                     <li @if(request()->is('product')) class="colorlib-active" @endif><a href="{{ route('product.index') }}">รายการสินค้า</a></li>

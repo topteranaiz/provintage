@@ -18,7 +18,7 @@
                                     <p>รหัสบัตรประชาชน: {{ $item->card_id }}</p>
                                     <p>วันที่โอน: {{ $item->date_transfer }}</p>
                                     <p>ยอดโอน: {{ $item->price }}</p>
-                                    <p>เว็บประกาศขายของ: {{ $item->price }}</p>
+                                    <p>เว็บประกาศขายของ: {{ $item->web }}</p>
                                 </div>
                             </div>
                         </div>

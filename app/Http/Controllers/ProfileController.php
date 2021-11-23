@@ -8,6 +8,7 @@ use App\Models\UserAccount;
 use App\Models\Saler;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class ProfileController extends Controller
