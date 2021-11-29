@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Saler;
+use App\Models\BlacklistImage;
 
 Class Blacklist extends Model
 {
@@ -16,8 +17,13 @@ Class Blacklist extends Model
         'image',
         'date_transfer',
         'price',
-        'web'
+        'web',
+        'type_cheat'
     ];
+
+    public function getBlacklistImage() {
+        return $this->hasMany(BlacklistImage::class, 'blacklist_id', 'blacklist_id');
+    }
 
     // public function getUser() {
     //     return $this->belongsTo(UserAccount::class, 'user_id', 'user_id');

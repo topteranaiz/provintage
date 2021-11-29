@@ -19,13 +19,23 @@ class WebsiteController extends Controller
     public function index(Product $product, TypeProduct $typeproduct) {
 
         $inputs = request()->input();
+        $priceStart = request()->input('priceStart');
+        $priceEnd = request()->input('priceEnd');
 
         if (isset($inputs['name'])) {
             $product = $product->where('name','LIKE','%' . trim($inputs['name']) . '%');
         }
 
-        if (isset($inputs['price'])) {
-            $product = $product->where('price',$inputs['price']);
+        if (!empty($priceStart)) {
+            $product = $product->where('price', '>=', $priceStart);
+        }
+
+        if (!empty($priceEnd)) {
+            $product = $product->where('price', '<=', $priceEnd);
+        }
+
+        if (!empty($priceStart) && !empty($priceEnd)) {
+            $product = $product->whereBetween('price',array($priceStart, $priceEnd));
         }
 
         $this->data['products'] = $product->get();
@@ -118,6 +128,12 @@ class WebsiteController extends Controller
     }
 
     public function getBlacklist(Blacklist $blacklist, Admin $admin) {
+
+        $inputs = request()->input();
+
+        if (isset($inputs['type_cheat'])) {
+            $blacklist = $blacklist->where('type_cheat',$inputs['type_cheat']);
+        }
 
         $this->data['blacklists'] = $blacklist->get();
         $this->data['admin'] = $admin->first();

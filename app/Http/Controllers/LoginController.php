@@ -103,7 +103,9 @@ class LoginController extends Controller
                 session([
                     'data' => $dataSaler
                 ]);
-                return redirect()->route('product.index');
+                // return redirect()->route('product.index');
+                return redirect('/website');
+
             
         }else if(!empty($dataUser)) {
 
@@ -126,7 +128,8 @@ class LoginController extends Controller
             session([
                 'data' => $dataAdmin
             ]);
-            return redirect()->route('typeProduct.index');
+            return redirect('/website');
+            // return redirect()->route('typeProduct.index');
 
         }
     }

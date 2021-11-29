@@ -53,6 +53,8 @@ Route::group(['prefix' => 'blacklist'], function() {
     Route::get('/edit/{id}','BlacklistController@edit')->name('blacklist.edit');
     Route::post('/update','BlacklistController@update')->name('blacklist.update');
     Route::get('/delete/{id}', 'BlacklistController@delete')->name('blacklist.delete');
+    Route::get('/delete-image/{id}','BlacklistController@deleteImage')->name('blacklist.deleteImage');
+
 });
 
 Route::group(['prefix' => 'profile'], function() {

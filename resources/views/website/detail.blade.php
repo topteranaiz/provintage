@@ -24,6 +24,17 @@
                                 {{-- <span class="category mb-1 d-block"><a href="#">Technology</a></span> --}}
                                 <h3 class="mb-4"><a href="#">{{ $detail->name }}</a></h3>
                                 <p class="mb-4">{{ $detail->detail }}</p>
+
+                                <div class="meta-wrap d-md-flex align-items-center">
+                                    <div class="half">
+                                        <h3 class="mb-4"><a href="#">ข้อมูลสินค้า</a></h3>
+                                        <p>Size : {{ $detail->getSize() }}</p>
+                                        <p>ราคา : {{ $detail->price }}</p>
+                                        <p>ชนิดผ้า : {{ $detail->getFabric() }}</p>
+                                        <p>ปีที่ผลิต : {{ $detail->getYear() }}</p>
+                                        <p>ประเทศที่ผลิต : {{ $detail->getMadeIn() }}</p>
+                                    </div>
+                                </div>
                                 
                                 <div class="meta-wrap d-md-flex align-items-center">
                                     <div class="half">
@@ -34,36 +45,35 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="block comment">
-                                    <h4>Comment</h4>
-                                    
-                                    @if(count($detail->getComment) > 0)
-                                        @foreach ($detail->getComment as $item)
-                                        {{-- {{ dd($item->getUser) }} --}}
-                                            <div class="author mb-4 d-flex align-items-center">
-                                                <a href="#" class="img" @if(!empty($item->getUser->image)) style="background-image: url({{ asset($item->getUser->image) }});" @else style="background-image: url(/image/default.png);" @endif></a>
-                                                <div class="ml-3 info">
-                                                    <span>{{ $item->comment }}</span>
-                                                    <h3>{{ $item->getUser->name }}, <span>{{ $item->created_at }}</span></h3>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="media">
-                                                <div class="media-body">
-                                                    <div class="name">
-                                                        <h5>{{ $item->getUser->name }}</h5>
-                                                    </div>
-                                                    <div class="date">
-                                                        <p>{{ $item->created_at }}</p>
-                                                    </div>
-                                                    <div class="review-comment">
-                                                        <p>{{ $item->comment }}</p>
+                                @if (!empty(Auth::guard('member')->user()))
+                                    <div class="block comment">
+                                        <h4>Comment</h4>
+                                        @if(count($detail->getComment) > 0)
+                                            @foreach ($detail->getComment as $item)
+                                            {{-- {{ dd($item->getUser) }} --}}
+                                                <div class="author mb-4 d-flex align-items-center">
+                                                    <a href="#" class="img" @if(!empty($item->getUser->image)) style="background-image: url({{ asset($item->getUser->image) }});" @else style="background-image: url(/image/default.png);" @endif></a>
+                                                    <div class="ml-3 info">
+                                                        <span>{{ $item->comment }}</span>
+                                                        <h3>{{ $item->getUser->name }}, <span>{{ $item->created_at }}</span></h3>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <hr> --}}
-                                        @endforeach
-                                    @endif
-                                    @if (!empty(Auth::guard('member')->user()))
+                                                {{-- <div class="media">
+                                                    <div class="media-body">
+                                                        <div class="name">
+                                                            <h5>{{ $item->getUser->name }}</h5>
+                                                        </div>
+                                                        <div class="date">
+                                                            <p>{{ $item->created_at }}</p>
+                                                        </div>
+                                                        <div class="review-comment">
+                                                            <p>{{ $item->comment }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr> --}}
+                                            @endforeach
+                                        @endif
                                         <form action="{{ route('website.shirt.comment') }}" method="POST">
                                             @csrf
                                             <div class="form-group mb-30">
@@ -74,8 +84,8 @@
                                             </div>
                                             <a><input type="submit" value="บันทึก" class="btn btn-success py-3 px-5"></a>
                                         </form>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

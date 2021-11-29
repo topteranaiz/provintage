@@ -40,8 +40,10 @@
                         <div class="form-group">
                             <h3 class="mb-4 sidebar-heading">ค้นหาชื่อเสื้อวง</h3>
                             <input type="text" name="name" value="{{ request()->input('name') ? request()->input('name') : null }}" class="form-control" placeholder="ค้นหาชื่อเสื้อวง"><br>
-                            <h3 class="mb-4 sidebar-heading">ค้นหาราคาเสื้อวง</h3>
-                            <input type="text" name="price" value="{{ request()->input('price') ? request()->input('price') : null }}" class="form-control" placeholder="ค้นหาราคาเสื้อวง">
+                            <h3 class="mb-4 sidebar-heading">ราคาเสื้อวงเริ่มต้น</h3>
+                            <input type="text" name="priceStart" value="{{ request()->input('priceStart') ? request()->input('priceStart') : null }}" class="form-control" placeholder="ค้นหาราคาเสื้อวง"><br>
+                            <h3 class="mb-4 sidebar-heading">ราคาเสื้อวงสิ้นสุด</h3>
+                            <input type="text" name="priceEnd" value="{{ request()->input('priceEnd') ? request()->input('priceEnd') : null }}" class="form-control" placeholder="ค้นหาราคาเสื้อวง">
                             <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
                         </div>
                     </form>

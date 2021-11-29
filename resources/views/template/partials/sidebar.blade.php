@@ -2,25 +2,28 @@
     {{-- <h1 id="colorlib-logo">{{ Session::get('data.name') }}<br> --}}
         @if(!empty(Auth::guard('shop')->user()))
             <h1 id="colorlib-logo">{{ Auth::guard('shop')->user()->name }}<br>
-                <a href="{{ route('profile.edit.shop', Auth::guard('shop')->user()->saler_id) }}"><span>Edit Profile</span></a>
+                <a href="{{ route('profile.edit.shop', Auth::guard('shop')->user()->saler_id) }}"><span style="font-size:22px;">Edit Profile</span></a>
             </h1>
         @elseif(!empty(Auth::guard('member')->user()))
             <h1 id="colorlib-logo">{{ Auth::guard('member')->user()->name }}<br>
-                <a href="{{ route('profile.edit.member', Auth::guard('member')->user()->user_id) }}"><span>Edit Profile</span></a>
+                <a href="{{ route('profile.edit.member', Auth::guard('member')->user()->user_id) }}"><span style="font-size:22px;">Edit Profile</span></a>
             </h1>
         @elseif(!empty(Auth::guard('admin')->user()))
             <h1 id="colorlib-logo">{{ Auth::guard('admin')->user()->name }}<br>
-                <a href="{{ route('profile.edit.admin', Auth::guard('admin')->user()->admin_id) }}"><span>Edit Profile</span></a>
+                <a href="{{ route('profile.edit.admin', Auth::guard('admin')->user()->admin_id) }}"><span style="font-size:22px;">Edit Profile</span></a>
             </h1>
         @endif
     {{-- </h1> --}}
+    {{-- {{ dd(Session::get('data')) }} --}}
     <nav id="colorlib-main-menu" role="navigation">
         {{-- {{ dd(request()->is('website/blacklist')) }} --}}
         <ul>
             <li @if(request()->is('website') || request()->is('website/search/*')) class="colorlib-active" @endif><a href="{{ route('website.home') }}">Home</a></li>
-            <li @if(request()->is('website/define')) class="colorlib-active" @endif><a href="{{ route('website.define') }}">นิยาม</a></li>
-            <li @if(request()->is('website/shirt-label')) class="colorlib-active" @endif><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
-            <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('website.blacklist') }}">บุคคลที่ควรระวัง</a></li>
+            @if(!empty(Session::get('data')))
+                <li @if(request()->is('website/define')) class="colorlib-active" @endif><a href="{{ route('website.define') }}">นิยาม</a></li>
+                <li @if(request()->is('website/shirt-label')) class="colorlib-active" @endif><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
+                <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="{{ route('website.blacklist') }}">บุคคลที่ควรระวัง</a></li>
+            @endif
             @if(empty(Session::get('data')))
                 <li @if(request()->is('login')) class="colorlib-active" @endif><a href="{{ route('login') }}">Login</a></li>
             @else
@@ -30,7 +33,7 @@
                     {{-- <li @if(request()->is('website/blacklist')) class="colorlib-active" @endif><a href="#">รายการสั่งซื้อสินค้า</a></li> --}}
                 @elseif(!empty(Auth::guard('admin')->user()))
                     <li @if(request()->is('type-product')) class="colorlib-active" @endif><a href="{{ route('typeProduct.index') }}">รายการประเภทสินค้า</a></li>
-                    <li @if(request()->is('blacklist')) class="colorlib-active" @endif><a href="{{ route('blacklist.index') }}">blacklist</a></li>
+                    {{-- <li @if(request()->is('blacklist')) class="colorlib-active" @endif><a href="{{ route('blacklist.index') }}">blacklist</a></li> --}}
                 @endif
                 <li><a href="{{ route('get.logout') }}">Logout</a></li>
             @endif
