@@ -4,10 +4,9 @@
     @if(!empty(Auth::guard('admin')->user()))
         <a href="{{ route('blacklist.create') }}"><h4 align="center">เพิ่ม BlackList</h4></a>
     @endif
-    <h3 align="center">BlackList</h3>
-    <p align="center">แจ้งรายงานแอดมินได้ที่</p>
-    <p align="center">Line : {{ $admin->line_id }}</p>
-    <p align="center">Facebook : {{ $admin->facebook }}</p>
+    <h2 align="center" style="color: red; font-weight: bold">บุคคลที่ควรระวัง</h2>
+    <p align="center" style="color: black; font-weight: bold">อ้างอิงจากเว็บไซต์ : Blacklistseller ร่วมต้านภัยฉ้อโกงออนไลน์ หรือ จากการรายงานผ่านแอดมินทางช่องทางการติดต่อ (พร้อมหลักฐาน)</p>
+    <p align="center" style="color: blue; font-weight: bold">แจ้งรายงานแอดมินได้ที่ Line : {{ $admin->line_id }} หรือ Facebook : {{ $admin->facebook }}</p>
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
