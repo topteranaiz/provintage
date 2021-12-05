@@ -27,6 +27,10 @@
                             <input type="password" class="form-control" placeholder="กรุณากรอก Password" name="password">
                         </div>
                         <div class="form-group">
+                            <label for="">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" required placeholder="กรุณากรอก ยืนยันรหัสผ่าน" name="confirmed">
+                        </div>
+                        <div class="form-group">
                             <label for="">รูปภาพโปรไฟล์</label>
                             <input type="file" class="form-control" name="image">
                         </div>
@@ -41,7 +45,7 @@
                         </div>
                         <div class="shop form-group">
                             <label for="">บัตรประชาชน</label>
-                            <input type="text" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" value="{{ isset($edit) ? $edit->card_id: "" }}" name="card_id" maxlength="13">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" value="{{ isset($edit) ? $edit->card_id: "" }}" name="card_id" maxlength="13">
                         </div>
                         <div align="center" class="form-group">
                             <input type="submit" value="บันทึก" class="btn btn-primary py-3 px-5">

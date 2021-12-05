@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label>บัตรประชาชน</label>
-                            <input type="text" class="form-control" name="card_id" required value="{{ isset($edit) ? $edit->card_id: "" }}">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" name="card_id" required value="{{ isset($edit) ? $edit->card_id: "" }}">
                         </div>
                         <div class="form-group">
                             <label>วันที่โอน</label>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label>ยอดโอน</label>
-                            <input type="text" class="form-control" name="price" required value="{{ isset($edit) ? $edit->price: "" }}">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" name="price" required value="{{ isset($edit) ? $edit->price: "" }}">
                         </div>
                         <div class="form-group">
                             <label>เว็บประกาศขายของ</label>

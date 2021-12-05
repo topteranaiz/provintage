@@ -129,7 +129,7 @@
                         </div>
                         <div class="shop form-group" @if(old('type_personal_id') == "1") style="display: block;" @else style="display: none;"@endif>
                             <label for="">บัตรประชาชน</label>
-                            <input type="text" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" name="card_id" maxlength="13" value="{{ old('card_id') }}">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="กรุณากรอก บัตรประชาชน" name="card_id" maxlength="13" value="{{ old('card_id') }}">
                         </div>
                         <div align="center" class="form-group">
                             <input type="submit" value="Register" class="btn btn-primary py-3 px-5">

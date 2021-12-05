@@ -51,11 +51,11 @@
                         </div>
                         <div class="form-group">
                             <label for="first-name">จำนวน</label>
-                            <input type="text" class="form-control" name="amount" value="{{ isset($edit) ? $edit->amount: "" }}">
+                            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="amount" value="{{ isset($edit) ? $edit->amount: "" }}">
                         </div>
                         <div class="form-group">
                             <label for="first-name">ราคา</label>
-                            <input type="text" class="form-control" name="price" value="{{ isset($edit) ? $edit->price: "" }}">
+                            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="price" value="{{ isset($edit) ? $edit->price: "" }}">
                         </div>
                         <div class="form-group">
                             <label for="first-name">ปีที่ผลิต</label>

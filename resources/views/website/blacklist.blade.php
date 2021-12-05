@@ -25,7 +25,10 @@
                                         <a href="{{ route('blacklist.edit',[$item->blacklist_id]) }}" style="color: rgb(116, 116, 114)">
                                             <i class="fa fa-save"></i> แก้ไข
                                         </a>
-                                        <a href="{{ route('blacklist.delete',[$item->blacklist_id]) }}" style="color: red">
+                                        {{-- <a href="{{ route('blacklist.delete',[$item->blacklist_id]) }}" style="color: red">
+                                            <i class="fa fa-trash"></i> ลบ
+                                        </a> --}}
+                                        <a onclick="alertConfirm({{ $item->blacklist_id }})" style="color: red">
                                             <i class="fa fa-trash"></i> ลบ
                                         </a>
                                     @endif
@@ -55,4 +58,25 @@
         </div>
     </div>
 </section>
+@endsection
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section('js')
+    <script>
+        function alertConfirm(id) {
+            Swal.fire({
+            title: 'ยืนยันการลบช้อมูล?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{URL::to('blacklist/delete')}}"+'/'+id
+                }
+            })
+            console.log('id', id)
+        }
+    </script>
 @endsection

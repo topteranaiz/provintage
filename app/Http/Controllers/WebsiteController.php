@@ -38,6 +38,26 @@ class WebsiteController extends Controller
             $product = $product->whereBetween('price',array($priceStart, $priceEnd));
         }
 
+        if (isset($inputs['category_id'])) {
+            $product = $product->where('category_id', $inputs['category_id']);
+        }
+
+        if (isset($inputs['size'])) {
+            $product = $product->where('size', $inputs['size']);
+        }
+
+        if (isset($inputs['fabric_type'])) {
+            $product = $product->where('fabric_type', $inputs['fabric_type']);
+        }
+
+        if (isset($inputs['year'])) {
+            $product = $product->where('year', $inputs['year']);
+        }
+
+        if (isset($inputs['made_in'])) {
+            $product = $product->where('made_in', $inputs['made_in']);
+        }
+
         $this->data['products'] = $product->get();
         $this->data['typeproducts'] = $typeproduct->get();
         return view('website.home', $this->data);
@@ -130,12 +150,13 @@ class WebsiteController extends Controller
     public function getBlacklist(Blacklist $blacklist, Admin $admin) {
 
         $inputs = request()->input();
+        $this->data['blacklists'] = array();
 
-        if (isset($inputs['type_cheat'])) {
-            $blacklist = $blacklist->where('type_cheat',$inputs['type_cheat']);
+        if (isset($inputs['type_cheat']) && !empty($inputs['type_cheat'])) {
+            $this->data['blacklists'] = $blacklist->where('type_cheat',$inputs['type_cheat'])->get();
         }
 
-        $this->data['blacklists'] = $blacklist->get();
+        // $this->data['blacklists'] = $blacklist->get();
         $this->data['admin'] = $admin->first();
 
         return view('website.blacklist', $this->data);

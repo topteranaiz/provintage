@@ -4956,6 +4956,15 @@ button.close {
 .align-text-top {
   vertical-align: text-top !important; }
 
+  /* .bg-home {
+    background-color: red;
+  } */
+
+  .bg-home {
+    background: url('/template/images/bg_1.jpg');;
+    background-size: cover;
+    width: auto
+  }
 .bg-primary {
   background-color: #78d5ef !important; }
 

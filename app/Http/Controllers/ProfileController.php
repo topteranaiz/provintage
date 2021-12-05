@@ -39,6 +39,9 @@ class ProfileController extends Controller
 
         $inputs = $req->only('name', 'email', 'line_id', 'card_id');
         if (!empty($req->password)) {
+            if ($req->password != $req->confirmed) {
+                return redirect()->back()->withInput()->with('error', 'รหัสผ่านไม่ตรงกัน'); 
+            }
             $inputs['password'] = Hash::make($req->password);
         }
         
@@ -69,6 +72,9 @@ class ProfileController extends Controller
 
         $inputs = $req->only('name', 'email');
         if (!empty($req->password)) {
+            if ($req->password != $req->confirmed) {
+                return redirect()->back()->withInput()->with('error', 'รหัสผ่านไม่ตรงกัน'); 
+            }
             $inputs['password'] = Hash::make($req->password);
         }
         
@@ -98,7 +104,13 @@ class ProfileController extends Controller
     public function updateAdmin(Request $req, Admin $admin) {
 
         $inputs = $req->only('name', 'email', 'line_id', 'facebook', 'tel');
+
+        
+
         if (!empty($req->password)) {
+            if ($req->password != $req->confirmed) {
+                return redirect()->back()->withInput()->with('error', 'รหัสผ่านไม่ตรงกัน'); 
+            }
             $inputs['password'] = Hash::make($req->password);
         }
         

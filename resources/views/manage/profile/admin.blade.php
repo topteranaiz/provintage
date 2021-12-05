@@ -11,6 +11,13 @@
                 <div class="col-md-12 order-md-last pr-md-6">
                     <form action="{{ route('profile.update.admin') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @if (\Session::has('error'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{!! \Session::get('error') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
                         @if(isset($edit))
                             <input type="hidden" name="admin_id" value="{{ $edit->admin_id }}">
                         @endif
@@ -25,6 +32,10 @@
                         <div class="form-group">
                             <label for="">รหัสผ่าน</label>
                             <input type="password" class="form-control" placeholder="กรุณากรอก Password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" required placeholder="กรุณากรอก ยืนยันรหัสผ่าน" name="confirmed">
                         </div>
                         <div class="form-group">
                             <label for="">รูปภาพโปรไฟล์</label>

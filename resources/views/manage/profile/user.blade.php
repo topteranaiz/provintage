@@ -27,6 +27,10 @@
                             <input type="password" class="form-control" name="password">
                         </div>
                         <div class="form-group">
+                            <label for="">ยืนยันรหัสผ่าน</label>
+                            <input type="password" class="form-control" required placeholder="กรุณากรอก ยืนยันรหัสผ่าน" name="confirmed">
+                        </div>
+                        <div class="form-group">
                             <label for="">รูปภาพโปรไฟล์</label>
                             <input type="file" class="form-control" name="image">
                         </div>
