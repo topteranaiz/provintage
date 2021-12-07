@@ -61,9 +61,9 @@
                             <label for="first-name">ปีที่ผลิต</label>
                             <select name="year" class="form-control">
                                 <option value="">กรุณาเลือก</option>
-                                <option {{ ( isset($edit) && $edit->year == 1 ? 'selected' : '')  }} value="1">1980</option>
-                                <option {{ ( isset($edit) && $edit->year == 2 ? 'selected' : '')  }} value="2">1990</option>
-                                <option {{ ( isset($edit) && $edit->year == 3 ? 'selected' : '')  }} value="3">2000</option>
+                                <option {{ ( isset($edit) && $edit->year == 1 ? 'selected' : '')  }} value="1">1980's</option>
+                                <option {{ ( isset($edit) && $edit->year == 2 ? 'selected' : '')  }} value="2">1990's</option>
+                                <option {{ ( isset($edit) && $edit->year == 3 ? 'selected' : '')  }} value="3">2000's</option>
                             </select>
                         </div>
                         <div class="form-group">

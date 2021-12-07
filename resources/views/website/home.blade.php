@@ -83,9 +83,9 @@
                             <h3 class="mb-4 sidebar-heading">ปีที่ผลิต</h3>
                             <select name="year" class="form-control">
                                 <option value="">กรุณาเลือก</option>
-                                <option {{ ( request()->input('year') == 1 ? 'selected' : '')  }} value="1">1980</option>
-                                <option {{ ( request()->input('year') == 2 ? 'selected' : '')  }} value="2">1990</option>
-                                <option {{ ( request()->input('year') == 3 ? 'selected' : '')  }} value="3">2000</option>
+                                <option {{ ( request()->input('year') == 1 ? 'selected' : '')  }} value="1">1980's</option>
+                                <option {{ ( request()->input('year') == 2 ? 'selected' : '')  }} value="2">1990's</option>
+                                <option {{ ( request()->input('year') == 3 ? 'selected' : '')  }} value="3">2000's</option>
                             </select><br>
                             <h3 class="mb-4 sidebar-heading">ประเทศที่ผลิต</h3>
                             <select name="made_in" class="form-control">
