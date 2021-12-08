@@ -39,7 +39,7 @@ class WebsiteController extends Controller
         }
 
         if (isset($inputs['category_id'])) {
-            $product = $product->where('category_id', $inputs['category_id']);
+            $product = $product->where('type_product_id', $inputs['category_id']);
         }
 
         if (isset($inputs['size'])) {
@@ -160,5 +160,11 @@ class WebsiteController extends Controller
         $this->data['admin'] = $admin->first();
 
         return view('website.blacklist', $this->data);
+    }
+
+    public function detailBlacklist($id, Blacklist $blacklist, Admin $admin) {
+
+        $this->data['dataBlacklists'] = $blacklist->find($id);
+        return view('website.detailBlacklist', $this->data);
     }
 }

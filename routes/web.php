@@ -32,6 +32,8 @@ Route::group(['prefix' => 'website'], function() {
     Route::get('/shirt-label', 'WebsiteController@getShirtLabel')->name('website.shirt.label');
     Route::post('/comment/store', 'WebsiteController@storeComment')->name('website.shirt.comment');
     Route::get('/blacklist', 'WebsiteController@getBlacklist')->name('website.blacklist');
+    Route::get('/blacklist/detail/{id}', 'WebsiteController@detailBlacklist')->name('website.blacklist.detail');
+
 
     // Route::get('/','WebsiteController@index')->name('website.home');
     // Route::get('/create','WebsiteController@create')->name('typeProduct.create');

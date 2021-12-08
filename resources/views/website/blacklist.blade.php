@@ -16,7 +16,7 @@
                             <div class="blog-entry ftco-animate">
                                 <img class="card-img-top" @if(count($item->getBlacklistImage) > 0) src="{{ asset($item->getBlacklistImage[0]->image) }}" @else src="/image/default.png" @endif width="200" height="300" alt="Card image cap">
                                 <div class="text text-2 pt-2 mt-3">
-                                    <h3 align="center" class="mb-4"><a href="#">ชื่อ: {{ $item->name }}</a></h3>
+                                    <h3 align="center" class="mb-4"><a href="{{ route('website.blacklist.detail', [$item->blacklist_id]) }}">ชื่อ: {{ $item->name }}</a></h3>
                                     {{-- <p>รหัสบัตรประชาชน: {{ $item->card_id }}</p> --}}
                                     <p>วันที่โอน: {{ $item->date_transfer }}</p>
                                     <p>ยอดโอน: {{ $item->price }} บาท</p>
