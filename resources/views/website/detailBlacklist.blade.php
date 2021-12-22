@@ -12,9 +12,13 @@
                     <p style="font-size:18px;">ยอดโอน: {{ $dataBlacklists->price }} บาท</p>
                     <p style="font-size:18px;">เว็บประกาศขายของ: {{ $dataBlacklists->web }}</p>
                     @foreach ($dataBlacklists->getBlacklistImage as $item)
-                        <div class="image">
-                            <img class="card-img-top" src="{{ asset($item->image) }}" width="100" height="250"alt="Card image cap">
-                        </div><br>
+                    <div align="center">
+                        <div class="col-md-6">
+                            <div class="image">
+                                <img class="card-img-top" src="{{ asset($item->image) }}" width="100" height="auto"alt="Card image cap">
+                            </div><br>
+                        </div>
+                    </div>
                     @endforeach
                     
                 </article>

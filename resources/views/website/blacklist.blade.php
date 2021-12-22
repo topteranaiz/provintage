@@ -64,7 +64,7 @@
     <script>
         function alertConfirm(id) {
             Swal.fire({
-            title: 'ยืนยันการลบช้อมูล?',
+            title: 'ยืนยันการลบข้อมูล?',
             // text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,

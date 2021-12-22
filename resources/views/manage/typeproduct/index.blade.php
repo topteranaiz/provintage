@@ -24,7 +24,7 @@
                                 <a href="{{ route('typeProduct.edit',[$item->type_product_id]) }}" style="color: rgb(116, 116, 114)">
                                     <i class="fa fa-save"></i> แก้ไข
                                 </a>
-                                <a href="{{ route('typeProduct.delete',[$item->type_product_id]) }}" style="color: red">
+                                <a onclick="alertConfirm({{ $item->type_product_id }})" style="color: red">
                                     <i class="fa fa-trash"></i> ลบ
                                 </a>
                             </td>
@@ -35,4 +35,25 @@
         </div>
     </div>
 </section>
+@endsection
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section('js')
+    <script>
+        function alertConfirm(id) {
+            Swal.fire({
+            title: 'ยืนยันการลบข้อมูล?',
+            // text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{URL::to('type-product/delete')}}"+'/'+id
+                }
+            })
+            console.log('id', id)
+        }
+    </script>
 @endsection

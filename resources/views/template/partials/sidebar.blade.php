@@ -19,14 +19,14 @@
         {{-- {{ dd(request()->is('website/blacklist')) }} --}}
         <ul>
             @if(!empty(Auth::guard('shop')->user()))
-                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.shop', Auth::guard('shop')->user()->saler_id) }}">Edit Profile</a></li>
+                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.shop', Auth::guard('shop')->user()->saler_id) }}">แก้ไขโปรไฟล์</a></li>
             @elseif(!empty(Auth::guard('member')->user()))
-                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.member', Auth::guard('member')->user()->user_id) }}">Edit Profile</a></li>
+                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.member', Auth::guard('member')->user()->user_id) }}">แก้ไขโปรไฟล์</a></li>
             @elseif(!empty(Auth::guard('admin')->user()))
-                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.admin', Auth::guard('admin')->user()->admin_id) }}">Edit Profile</a></li>
+                <li @if(request()->is('profile/*')) class="colorlib-active" @endif><a href="{{ route('profile.edit.admin', Auth::guard('admin')->user()->admin_id) }}">แก้ไขโปรไฟล์</a></li>
             @endif
 
-            <li @if(request()->is('website') || request()->is('website/search/*')) class="colorlib-active" @endif><a href="{{ route('website.home') }}">Home</a></li>
+            <li @if(request()->is('website') || request()->is('website/search/*')) class="colorlib-active" @endif><a href="{{ route('website.home') }}">หน้าแรก</a></li>
             @if(!empty(Session::get('data')))
                 <li @if(request()->is('website/define')) class="colorlib-active" @endif><a href="{{ route('website.define') }}">นิยาม</a></li>
                 <li @if(request()->is('website/shirt-label')) class="colorlib-active" @endif><a href="{{ route('website.shirt.label') }}">ป้ายเสื้อ</a></li>
