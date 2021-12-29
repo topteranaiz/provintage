@@ -22,7 +22,7 @@
                     @foreach ($dataProducts as $key => $item)
                         <tr>
                             <td align="center">{{ $key + 1 }}</td>
-                            <td align="center">{{ $item->getTypeProduct->name }}</td>
+                            <td align="center">{{ !empty($item->getTypeProduct) && !empty($item->getTypeProduct->name) ? $item->getTypeProduct->name: '-' }}</td>
                             <td align="center">{{ $item->name }}</td>
                             <td align="center">{{ $item->price }}</td>
                             <td align="center">{{ $item->amount }}</td>
